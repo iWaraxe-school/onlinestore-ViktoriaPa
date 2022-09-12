@@ -6,7 +6,7 @@ import by.issoft.domain.Product;
 import java.util.List;
 
 public class BikeCategory extends Category {
-    public BikeCategory(String name, List<Product> productList) {
-        super(name, productList);
+    public BikeCategory(String name) {
+        super(name);
     }
 }
