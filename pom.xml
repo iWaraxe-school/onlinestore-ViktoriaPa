@@ -13,6 +13,12 @@
         <module>store</module>
         <module>consoleApp</module>
     </modules>
-
+    <dependencies>
+        <dependency>
+            <groupId>com.github.javafaker</groupId>
+            <artifactId>javafaker</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+    </dependencies>
 
 </project>
