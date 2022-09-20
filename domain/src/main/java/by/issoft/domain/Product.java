@@ -10,4 +10,16 @@ public class Product {
         this.rate = rate;
         this.price = price;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getRate() {
+        return rate;
+    }
+
+    public double getPrice() {
+        return price;
+    }
 }
