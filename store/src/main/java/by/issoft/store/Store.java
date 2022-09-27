@@ -7,6 +7,13 @@ import java.util.List;
 
 public class Store {
 
-    private List<Category> categoryListList = new ArrayList<Category>();
-
+    private static List<Category> categoryList = new ArrayList<>();
+    public static void addCategoryToList(Category category) {
+        categoryList.add(category);
+    }
+    public void printCategoriesAndProducts(){
+        for (Category category : categoryList) {
+            category.printProductsFromList();
+        }
+    }
 }

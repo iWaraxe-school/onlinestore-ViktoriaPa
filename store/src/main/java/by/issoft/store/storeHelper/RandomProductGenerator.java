@@ -4,8 +4,16 @@ import com.github.javafaker.Faker;
 
 public class RandomProductGenerator {
     Faker faker = new Faker();
-    public String generateProductName() {
-        return faker.book().title();
+    public String generateProductName(String subCategoryName) {
+        switch (subCategoryName) {
+            case "Book":
+                return faker.book().title();
+            case "Color":
+                return faker.color().name();
+            case "Food":
+                return faker.food().dish();
+        }
+        return subCategoryName;
     }
 
     public Double generateProductPrice() {

@@ -4,8 +4,9 @@ import by.issoft.store.storeHelper.RandomStorePopulator;
 
 public class StoreApp {
     public static void main(String[] args) {
-        Store storeWithProducts = new Store();
-        RandomStorePopulator populator = new RandomStorePopulator(storeWithProducts);
-        populator.generateRandomProducts();
+        Store storeWithCategoriesAndProducts = new Store();
+        RandomStorePopulator populator = new RandomStorePopulator(storeWithCategoriesAndProducts);
+        populator.generateRandomStore();
+        storeWithCategoriesAndProducts.printCategoriesAndProducts();
     }
 }
