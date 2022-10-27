@@ -10,7 +10,9 @@ public abstract class Category {
     public Category(String name) {
         this.name = name;
     }
-
+    public List<Product> getProductList(){
+        return productList;
+    }
     public String getName() {
         return name;
     }

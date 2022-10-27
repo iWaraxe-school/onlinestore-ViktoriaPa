@@ -1,4 +1,4 @@
-package by.issoft.domain.XMLparser;
+package by.issoft.store.XMLparser;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;

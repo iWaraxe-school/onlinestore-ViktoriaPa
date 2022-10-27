@@ -52,7 +52,7 @@ public class RandomStorePopulator {
                 );
                 subCategory.addProductToList(product);
             }
-            Store.addCategoryToList(subCategory);
+            store.addCategoryToList(subCategory);
         }
 
     }

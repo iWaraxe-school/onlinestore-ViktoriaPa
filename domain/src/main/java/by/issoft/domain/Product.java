@@ -5,10 +5,10 @@ public class Product {
     private double rate;
     private double price;
 
-    public Product(String name, double rate, double price) {
+    public Product(String name, double price, double rate) {
         this.name = name;
-        this.rate = rate;
         this.price = price;
+        this.rate = rate;
     }
 
     public String getName() {
@@ -25,7 +25,7 @@ public class Product {
 
     @Override
     public String toString() {
-        String productInfo = String.format("Name: '%s', Price: '%s', Rate: '%s'", name, rate, price);
+        String productInfo = String.format("Name: '%s', Price: '%s', Rate: '%s'", name, price, rate);
         return productInfo;
     }
 }
