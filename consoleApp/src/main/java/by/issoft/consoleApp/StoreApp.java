@@ -1,45 +1,52 @@
 package by.issoft.consoleApp;
+import by.issoft.domain.Product;
 import by.issoft.store.comparator.ProductComparator;
 import by.issoft.store.Store;
 import by.issoft.store.storeHelper.RandomStorePopulator;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.List;
+
 public class StoreApp {
     public static void main(String[] args) {
-//        XMLParser parser = new XMLParser();
-//        Map<String, String> typesOfSorting = parser.parse();
-//        System.out.println(typesOfSorting);
-
         Store storeWithCategoriesAndProducts = new Store();
         RandomStorePopulator populator = new RandomStorePopulator(storeWithCategoriesAndProducts);
         populator.generateRandomStore();
         storeWithCategoriesAndProducts.printCategoriesAndProducts();
 
-        ProductComparator productComparator = new ProductComparator(storeWithCategoriesAndProducts);
-        productComparator.sortProducts();
-        productComparator.top5();
+        System.out.println("-------------------------------------------------------------------");
 
-//        System.out.println("-----------------------------");
-//        System.out.println("   ListOFAllProducts");
-//        System.out.println("-----------------------------");
-//        List<Product> allProducts = storeWithCategoriesAndProducts.getAllProducts();
-//        for(Product product : allProducts){
-//            System.out.println(product);
-//        }
-//
-//        System.out.println("-----------------------------");
-//        System.out.println("   SortedListOFAllProductsSimple");
-//        System.out.println("-----------------------------");
-//        Comparator<Product> nameComparatorSimple = Comparator.comparing(Product::getName, String::compareToIgnoreCase);
-//        Comparator<Product> priceComparatorSimple = Comparator.comparing((Product::getPrice));
-//        Comparator<Product> rateComparatorSimple = Comparator.comparing((Product::getRate));
-//
-//        Comparator<Product> generalComparatorSimple = nameComparatorSimple
-//                .thenComparing(priceComparatorSimple.reversed())
-//                .thenComparing(rateComparatorSimple.reversed());
-//
-//        allProducts.sort(generalComparatorSimple);
-//        for(Product product :allProducts){
-//            System.out.println(product);
-//        }
+        BufferedReader bufferedReader = null;
+        ProductComparator productComparator = new ProductComparator(storeWithCategoriesAndProducts);
+        try {
+            bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+            while (true){
+                System.out.print("Enter the command: ");
+                String input = bufferedReader.readLine();
+                switch (input) {
+                    case "top5":
+                        productComparator.top5();
+                        break;
+                    case "ListOfProducts":
+                        List<Product> allProducts = storeWithCategoriesAndProducts.getAllProducts();
+                        for(Product product : allProducts){
+                            System.out.println(product);
+                        }
+                        break;
+                    case "SortedListOfProducts":
+                        productComparator.sortProducts();
+                        break;
+                    case "quit":
+                        System.out.println("Exit!");
+                        System.exit(0);
+                    default:
+                        System.out.println("Wrong command");
+                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

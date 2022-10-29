@@ -46,10 +46,6 @@ public class ProductComparator {
         return store.getAllProducts().stream();
     }
     public void sortProducts () {
-        System.out.println("-----------------------------");
-        System.out.println("   SortedListOFAllProducts");
-        System.out.println("-----------------------------");
-
         XMLParser parser = new XMLParser();
         Map<String, String> configMap = parser.parse();
         Comparator<Product> productComparator = buildComparator(configMap);
@@ -59,9 +55,6 @@ public class ProductComparator {
     }
 
     public void top5 () {
-        System.out.println("-----------------------------");
-        System.out.println("   Top5");
-        System.out.println("-----------------------------");
         productStream()
                 .sorted(PRICE_COMPARATOR.reversed())
                 .limit(5)
