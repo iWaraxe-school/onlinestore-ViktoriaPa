@@ -8,7 +8,16 @@ import java.util.List;
 
 public class Store {
 
+    private static Store store;
     private List<Category> categoryList = new ArrayList<>();
+    private Store() {
+    }
+    public static Store getStore(){
+        if(store == null){
+            store = new Store();
+        }
+        return store;
+    }
     public void addCategoryToList(Category category) {
         categoryList.add(category);
     }

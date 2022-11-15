@@ -11,7 +11,7 @@ import java.util.List;
 
 public class StoreApp {
     public static void main(String[] args) {
-        Store storeWithCategoriesAndProducts = new Store();
+        Store storeWithCategoriesAndProducts = Store.getStore();
         RandomStorePopulator populator = new RandomStorePopulator(storeWithCategoriesAndProducts);
         populator.generateRandomStore();
         storeWithCategoriesAndProducts.printCategoriesAndProducts();
