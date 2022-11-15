@@ -12,7 +12,7 @@ public class Store {
     private List<Category> categoryList = new ArrayList<>();
     private Store() {
     }
-    public static Store getStore(){
+    public static Store getInstance(){
         if(store == null){
             store = new Store();
         }
