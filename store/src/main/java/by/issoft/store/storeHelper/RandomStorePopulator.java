@@ -2,6 +2,7 @@ package by.issoft.store.storeHelper;
 
 import by.issoft.domain.Category;
 import by.issoft.domain.Product;
+import by.issoft.domain.ProductBuilder;
 import by.issoft.store.Store;
 import org.reflections.Reflections;
 
@@ -21,7 +22,6 @@ public class RandomStorePopulator {
     }
 
     public void generateRandomStore() {
-
         Reflections reflections = new Reflections("by.issoft.domain.categories");
         Set<Class<?>> subTypes =
                 reflections.get(SubTypes.of(Category.class).asClass());
@@ -45,15 +45,14 @@ public class RandomStorePopulator {
         for (Category subCategory : subCategorySet) {
             Random random = new Random();
             for (int i = 0; i < random.nextInt(10); i++) {
-                Product product = new Product(
-                        products.generateProductName(subCategory.getName()),
-                        products.generateProductPrice(),
-                        products.generateProductRate()
-                );
+                Product product = new ProductBuilder()
+                        .name(products.generateProductName(subCategory.getName()))
+                        .price(products.generateProductPrice())
+                        .rate(products.generateProductRate())
+                        .build();
                 subCategory.addProductToList(product);
             }
             store.addCategoryToList(subCategory);
         }
-
     }
 }
