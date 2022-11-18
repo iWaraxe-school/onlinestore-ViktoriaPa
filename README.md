@@ -27,7 +27,14 @@ I implemented this pattern for the `Store` class:
 - to assure that only the same instance of the object is used each time; 
 - to prevent unnecessary memory waste for a new instance of the object when the app actually does not need a new one.
 
+
+## Implementation Builder pattern
+**Builder** is a creational design pattern that lets you construct complex objects step by step. The pattern allows you to produce different types and representations of an object using the same construction code.
+
+I implemented this pattern for the `Product` class to prevent bugs when creating objects of this class.
+
 ## Implementation Chain Of Responsibility pattern
 **Chain Of Responsibility** is a behavioral design pattern that lets you pass requests along a chain of handlers. Upon receiving a request, each handler decides either to process the request or to pass it to the next handler in the chain.
 
 I implemented this pattern to improve the interactions with Store.
+

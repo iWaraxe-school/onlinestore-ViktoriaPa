@@ -2,15 +2,14 @@ package by.issoft.domain;
 
 public class Product {
     private String name;
-    private double rate;
     private double price;
+    private double rate;
 
-    public Product(String name, double price, double rate) {
-        this.name = name;
-        this.price = price;
-        this.rate = rate;
+    Product(ProductBuilder productBuilder) {
+        this.name = productBuilder.getName();
+        this.price = productBuilder.getPrice();
+        this.rate = productBuilder.getRate();
     }
-
     public String getName() {
         return name;
     }
