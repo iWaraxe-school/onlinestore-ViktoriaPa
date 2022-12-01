@@ -1,7 +1,7 @@
 package by.issoft.consoleApp;
 import by.issoft.consoleApp.Commands.Top5;
-import by.issoft.store.comparator.ProductComparator;
 import by.issoft.store.Store;
+import by.issoft.store.multithreading.CleanOrder;
 import by.issoft.store.storeHelper.RandomStorePopulator;
 
 import java.io.BufferedReader;
@@ -15,13 +15,18 @@ public class StoreApp {
         populator.generateRandomStore();
         storeWithCategoriesAndProducts.printCategoriesAndProducts();
 
+        CleanOrder cleanOrder = new CleanOrder();
+        cleanOrder.start();
+
         System.out.println("-------------------------------------------------------------------");
         BufferedReader bufferedReader = null;
         try {
             bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-            System.out.print("Enter the command: ");
-            String input = bufferedReader.readLine();
-            new Top5().doCommand(input);
+            while (true) {
+                System.out.println("Enter the command (products, top5, sorted, order, quit): ");
+                String input = bufferedReader.readLine();
+                new Top5().doCommand(input);
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
