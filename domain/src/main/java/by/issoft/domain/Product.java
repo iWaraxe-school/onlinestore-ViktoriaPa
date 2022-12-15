@@ -10,6 +10,22 @@ public class Product {
         this.price = productBuilder.getPrice();
         this.rate = productBuilder.getRate();
     }
+
+    public Product() {
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public void setRate(double rate) {
+        this.rate = rate;
+    }
+
     public String getName() {
         return name;
     }
