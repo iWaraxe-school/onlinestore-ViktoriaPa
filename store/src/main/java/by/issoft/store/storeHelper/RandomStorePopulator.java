@@ -21,6 +21,9 @@ public class RandomStorePopulator {
         this.store = store;
     }
 
+    public RandomStorePopulator() {
+    }
+
     public void generateRandomStore() {
         Reflections reflections = new Reflections("by.issoft.domain.categories");
         Set<Class<?>> subTypes =

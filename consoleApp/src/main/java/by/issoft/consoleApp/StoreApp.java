@@ -18,51 +18,28 @@ import static by.issoft.consoleApp.BD.ConfigsTestStore.*;
 
 public class StoreApp {
     public static void main(String[] args) {
-        Store storeWithCategoriesAndProducts = Store.getInstance();
-        RandomStorePopulator populator = new RandomStorePopulator(storeWithCategoriesAndProducts);
-        populator.generateRandomStore();
-        storeWithCategoriesAndProducts.printCategoriesAndProducts();
+        DataBaseHandler.fillStoreDB();
 
-        CleanOrder cleanOrder = new CleanOrder();
-        cleanOrder.start();
-
-        String connectionString = "jdbc:mysql://" + dbHost + ":" + dbPort + "/" + dbName;
-        Connection dbConnection = null;
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            dbConnection = DriverManager.getConnection(connectionString, dbUser, dbPass);
-
-            DataBaseHandler.clearTable(dbConnection);
-
-            List<Product> allProducts = Store.getInstance().getAllProducts();
-            for(Product product : allProducts){
-                DataBaseHandler.addProductToDB(dbConnection, product);
-            }
-
-            DataBaseHandler.printProucts(dbConnection);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        } finally {
-            try {
-                dbConnection.close();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-        }
-
-        System.out.println("-------------------------------------------------------------------");
-        BufferedReader bufferedReader = null;
-        try {
-            bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-            while (true) {
-                System.out.println("Enter the command (products, top5, sorted, order, quit): ");
-                String input = bufferedReader.readLine();
-                new Top5().doCommand(input);
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+//        //Old Store
+//        Store storeWithCategoriesAndProducts = Store.getInstance();
+//        RandomStorePopulator populator = new RandomStorePopulator(storeWithCategoriesAndProducts);
+//        populator.generateRandomStore();
+//        storeWithCategoriesAndProducts.printCategoriesAndProducts();
+//
+//        CleanOrder cleanOrder = new CleanOrder();
+//        cleanOrder.start();
+//
+//        System.out.println("-------------------------------------------------------------------");
+//        BufferedReader bufferedReader = null;
+//        try {
+//            bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+//            while (true) {
+//                System.out.println("Enter the command (products, top5, sorted, order, quit): ");
+//                String input = bufferedReader.readLine();
+//                new Top5().doCommand(input);
+//            }
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
     }
 }
