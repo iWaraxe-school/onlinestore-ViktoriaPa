@@ -1,4 +1,4 @@
-package by.issoft.consoleApp.BD;
+package by.issoft.store.BD;
 
 public class ConfigsTestStore {
     public static String dbName = "OnlineStore";
