@@ -155,6 +155,31 @@ public class DataBaseHandler {
             }
         }
     }
+    public static String getProductsWithCategories() throws SQLException {
+        String categories = String.format("SELECT ID, NAME FROM CATEGORIES");
+        PreparedStatement preparedStatement = DBCONNECTION.prepareStatement(categories);
+        ResultSet setOfCategories = preparedStatement.executeQuery(categories);
+        StringBuilder sb = new StringBuilder();
+
+        while (setOfCategories.next()) {
+            String nameOfCategory = setOfCategories.getString(2);
+            sb.append(nameOfCategory.toString());
+            sb.append("\n");
+
+            String products = String.format("SELECT NAME, PRICE, RATE FROM PRODUCTS WHERE CATEGORY_ID = %s", setOfCategories.getString(1));
+            PreparedStatement preparedStatement1 = DBCONNECTION.prepareStatement(products);
+            ResultSet setOfProducts = preparedStatement1.executeQuery(products);
+            while (setOfProducts.next()) {
+                Product product = new Product();
+                product.setName(setOfProducts.getString(1));
+                product.setPrice(setOfProducts.getDouble(2));
+                product.setRate(setOfProducts.getDouble(3));
+                sb.append(product.toString());
+                sb.append("\n");
+            }
+        }
+        return sb.toString();
+    }
     public static void sortedProducts() throws SQLException {
         String printSortedListOfProducts = String.format("SELECT NAME, PRICE, RATE FROM PRODUCTS ORDER BY NAME ASC");
         PreparedStatement preparedStatement = DBCONNECTION.prepareStatement(printSortedListOfProducts);
@@ -170,6 +195,22 @@ public class DataBaseHandler {
             System.out.println(product);
         }
     }
+    public static String getSortedProducts() throws SQLException {
+        String sortedListOfProducts = String.format("SELECT NAME, PRICE, RATE FROM PRODUCTS ORDER BY NAME ASC");
+        PreparedStatement preparedStatement = DBCONNECTION.prepareStatement(sortedListOfProducts);
+        ResultSet listOfProducts = preparedStatement.executeQuery(sortedListOfProducts);
+        StringBuilder sb = new StringBuilder();
+
+        while (listOfProducts.next()){
+            Product product = new Product();
+            product.setName(listOfProducts.getString(1));
+            product.setPrice(listOfProducts.getDouble(2));
+            product.setRate(listOfProducts.getDouble(3));
+            sb.append(product.toString());
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
     public static void Top5() throws SQLException {
         String printSortedListOfProducts = String.format("SELECT NAME, PRICE, RATE FROM PRODUCTS ORDER BY PRICE DESC LIMIT 5");
         PreparedStatement preparedStatement = DBCONNECTION.prepareStatement(printSortedListOfProducts);
@@ -184,6 +225,44 @@ public class DataBaseHandler {
             product.setRate(listOfProducts.getDouble(3));
             System.out.println(product);
         }
+    }
+    public static String getTop5Http() throws SQLException {
+        String SortedListOfProducts = String.format("SELECT NAME, PRICE, RATE FROM PRODUCTS ORDER BY PRICE DESC LIMIT 5");
+        PreparedStatement preparedStatement = DBCONNECTION.prepareStatement(SortedListOfProducts);
+        ResultSet listOfProducts = preparedStatement.executeQuery(SortedListOfProducts);
+        StringBuilder sb = new StringBuilder();
+
+        while (listOfProducts.next()){
+            Product product = new Product();
+            product.setName(listOfProducts.getString(1));
+            product.setPrice(listOfProducts.getDouble(2));
+            product.setRate(listOfProducts.getDouble(3));
+
+            sb.append(product.toString());
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
+    public static String getProductNamefromDB() throws SQLException {
+        String printSortedListOfProducts = String.format("SELECT NAME FROM PRODUCTS");
+        PreparedStatement preparedStatement = DBCONNECTION.prepareStatement(printSortedListOfProducts);
+        ResultSet listOfProducts = preparedStatement.executeQuery(printSortedListOfProducts);
+        System.out.println("-------------------------------------------------------------------");
+        System.out.println("                              Top 5");
+        System.out.println("-------------------------------------------------------------------");
+        StringBuilder sb = new StringBuilder();
+
+        while (listOfProducts.next()){
+            Product product = new Product();
+            product.setName(listOfProducts.getString(1));
+            product.setPrice(listOfProducts.getDouble(2));
+            product.setRate(listOfProducts.getDouble(3));
+            System.out.println(product);
+
+            sb.append(product.toString());
+            sb.append("\n");
+        }
+        return sb.toString();
     }
     public static Product getRandomProduct() throws SQLException {
         String printSortedListOfProducts = String.format("SELECT NAME, PRICE, RATE FROM PRODUCTS ORDER BY RAND () LIMIT 1");
@@ -208,20 +287,26 @@ public class DataBaseHandler {
         preparedStatementAddProduct.setDouble(3, randomProduct.getRate());
         preparedStatementAddProduct.executeUpdate();
     }
-    public static void getOrdersFromDB() throws SQLException {
+    public static String getOrdersFromDB() throws SQLException {
         String printOrders = String.format("SELECT NAME, PRICE, RATE FROM ORDERS");
         PreparedStatement preparedStatement = DBCONNECTION.prepareStatement(printOrders);
         ResultSet listOfOrders = preparedStatement.executeQuery(printOrders);
         System.out.println("-------------------------------------------------------------------");
         System.out.println("                           LIST OF ORDERS");
         System.out.println("-------------------------------------------------------------------");
+
+        StringBuilder sb = new StringBuilder();
+
         while (listOfOrders.next()){
             Product order = new Product();
             order.setName(listOfOrders.getString(1));
             order.setPrice(listOfOrders.getDouble(2));
             order.setRate(listOfOrders.getDouble(3));
             System.out.println(order);
+            sb.append(order.toString());
+            sb.append("\n");
         }
+        return sb.toString();
     }
     public static void clearOrdersInDB() throws SQLException {
         String clearTableOrders = String.format("DELETE FROM ORDERS;");
