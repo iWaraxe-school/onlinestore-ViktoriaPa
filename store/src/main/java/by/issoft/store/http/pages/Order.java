@@ -12,6 +12,8 @@ public class Order implements HttpHandler {
     @SneakyThrows
     @Override
     public void handle(HttpExchange exchange) throws IOException {
-        handleResponse(exchange, "Ordered product: \n\n" + DataBaseHandler.getOrdersFromDB());
+        String orderedProduct = exchange.getRequestBody().toString(); // need to receive product from json
+        String response = "Ordered product: \n\n" + orderedProduct;
+        handleResponse(exchange, response);
     }
 }
