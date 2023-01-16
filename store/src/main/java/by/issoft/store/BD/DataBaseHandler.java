@@ -279,12 +279,12 @@ public class DataBaseHandler {
         }
         return product;
     }
-    public static void addOrderToDB(Product randomProduct) throws SQLException {
+    public static void addOrderToDB(Product product) throws SQLException {
         String addOrder = String.format("INSERT INTO ORDERS(NAME, PRICE, RATE) VALUES(?, ?, ?);");
         PreparedStatement preparedStatementAddProduct = DBCONNECTION.prepareStatement(addOrder);
-        preparedStatementAddProduct.setString(1, randomProduct.getName());
-        preparedStatementAddProduct.setDouble(2, randomProduct.getPrice());
-        preparedStatementAddProduct.setDouble(3, randomProduct.getRate());
+        preparedStatementAddProduct.setString(1, product.getName());
+        preparedStatementAddProduct.setDouble(2, product.getPrice());
+        preparedStatementAddProduct.setDouble(3, product.getRate());
         preparedStatementAddProduct.executeUpdate();
     }
     public static String getOrdersFromDB() throws SQLException {
